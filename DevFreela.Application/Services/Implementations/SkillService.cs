@@ -1,4 +1,5 @@
-﻿using DevFreela.Application.ViewModels;
+﻿using DevFreela.Application.Services.Interfaces;
+using DevFreela.Application.ViewModels;
 using DevFreela.Infrastructure.Persistence;
 using System.Collections.Generic;
 using System.Linq;
