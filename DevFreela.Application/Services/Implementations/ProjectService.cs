@@ -70,14 +70,5 @@ namespace DevFreela.Application.Services.Implementations
 
             _dbContext.SaveChanges();
         }
-
-        public void Update(UpdateProjectInputModel inputModel)
-        {
-            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == inputModel.Id);
-
-            project.Update(inputModel.Title, inputModel.Description, inputModel.TotalCost);
-
-            _dbContext.SaveChanges();
-        }
     }
 }
