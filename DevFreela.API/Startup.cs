@@ -1,7 +1,9 @@
 using DevFreela.API.Models;
+using DevFreela.Application.Commands.CreateProject;
 using DevFreela.Application.Services.Implementations;
 using DevFreela.Application.Services.Interfaces;
 using DevFreela.Infrastructure.Persistence;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,8 +27,6 @@ namespace DevFreela.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.Configure<OpeningTimeOption>(Configuration.GetSection("OpeningTime"));
-
             var connectionString = Configuration.GetConnectionString("DevFreelaCs");
             services.AddDbContext<DevFreelaDbContext>(
                     options => options.UseSqlServer(connectionString));
@@ -35,7 +35,8 @@ namespace DevFreela.API
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISkillService, SkillService>();
 
-            services.AddSingleton<ExampleClass>(e => new ExampleClass { Name = "Initial Stage" });
+            services.AddMediatR(typeof(CreateProjectCommand));
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
