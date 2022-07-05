@@ -32,7 +32,6 @@ namespace DevFreela.API
                     options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IProjectService, ProjectService>();
-            services.AddScoped<IUserService, UserService>();
 
             services.AddMediatR(typeof(CreateProjectCommand));
 
