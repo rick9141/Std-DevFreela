@@ -1,6 +1,5 @@
 ﻿using DevFreela.Core.Repositories;
 using MediatR;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,9 +16,11 @@ namespace DevFreela.Application.Commands.DeleteProject
 
         public async Task<Unit> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = _projectRepository.Projects.SingleOrDefault(p => p.Id == request.Id);
+            var project = await _projectRepository.GetByIdAsync(request.Id);
 
-            await _projectRepository.DeleteAsync(project);
+            project.Cancel();
+
+            await _projectRepository.SaveChangesAsync();
 
             return Unit.Value;
         }
