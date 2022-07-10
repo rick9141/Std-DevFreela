@@ -1,5 +1,7 @@
-﻿using DevFreela.Core.Entities;
+﻿using Dapper;
+using DevFreela.Core.Entities;
 using DevFreela.Core.Repositories;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -47,6 +49,19 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
             project.Cancel();
 
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task StartAsync(Project project)
+        {
+            //Using dapper
+            using (var sqlConnection = new SqlConnection(_connectionString))
+            {
+                sqlConnection.Open();
+
+                var script = "UPDATE Projects SET Status = @status, StartedAt = @startedat WHERE Id = @id";
+
+               await sqlConnection.ExecuteAsync(script, new { status = project.Status, startedat = project.StartedAt, project.Id });
+            }
         }
     }
 }
