@@ -63,5 +63,10 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
                await sqlConnection.ExecuteAsync(script, new { status = project.Status, startedat = project.StartedAt, project.Id });
             }
         }
+
+        public async Task SaveChangesAsync(Project project)
+        {
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
