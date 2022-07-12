@@ -46,6 +46,7 @@ namespace DevFreela.API.Controllers
 
                 return BadRequest(messages);
             }
+
             var id = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id = id }, command);
