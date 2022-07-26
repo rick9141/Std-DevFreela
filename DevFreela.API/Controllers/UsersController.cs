@@ -42,8 +42,8 @@ namespace DevFreela.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
-        // api/users/1/login
-        [HttpPut("{id}/login")]
+        // api/users/login
+        [HttpPut("login")]
         public IActionResult Login(int id, [FromBody] LoginModel login)
         {
             return NoContent();
