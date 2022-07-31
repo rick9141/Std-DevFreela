@@ -26,4 +26,4 @@ RUN dotnet publish "DevFreela.API.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-CMD ASPNETCORE_URLS\=http://\*:\$PORT\ dotnet\ DevFreela.API.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet DevFreela.API.dll
