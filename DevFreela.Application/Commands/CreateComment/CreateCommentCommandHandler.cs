@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Application.Commands.CreateComment
 {
-    class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, Unit>
+    public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, Unit>
     {
         private readonly IProjectRepository _projectRepository;
 
